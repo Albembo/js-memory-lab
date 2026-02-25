@@ -1,16 +1,15 @@
 import { run, bench, group } from 'mitata';
 
 async function main() {
-    const SIZE = 10_000; // Teniamolo più basso per evidenziare il costo di accesso
+    const SIZE = 10_000; // Keep it lower to highlight the access cost rather than iteration cost
 
-    // SETUP DATI PER IL TEST DEGLI OGGETTI
-    // 1. Monomorphic: Tutti uguali, creati nello stesso ordine
+    // 1. Monomorphic: All identical, created in the exact same order
     const monoArray = [];
     for (let i = 0; i < SIZE; i++) {
         monoArray.push({ a: i, b: i * 2 });
     }
 
-    // 2. Polymorphic: Stessi dati, ma ordine di creazione diverso
+    // 2. Polymorphic: Same data, but different property creation order
     const polyArray = [];
     for (let i = 0; i < SIZE; i++) {
         if (i % 2 === 0) {
@@ -20,36 +19,37 @@ async function main() {
         }
     }
 
-    group('Part 1: Array Element Kinds (Il costo del "tipo sporco")', () => {
+    /** BENCHMARKS */
+    group('Part 1: Array Element Kinds (The cost of "dirty types")', () => {
 
-        // Caso A: Array di soli Interi (SMI)
+        // Case A: Array of pure Integers (PACKED_SMI_ELEMENTS)
         const arrSmi = new Array(SIZE).fill(0).map((_, i) => i);
 
-        // Caso B: Array di Interi + 1 Double (Forza la conversione a Double)
+        // Case B: Array of Integers + 1 Double (Forces transition to PACKED_DOUBLE_ELEMENTS)
         const arrDouble = new Array(SIZE).fill(0).map((_, i) => i);
-        arrDouble[SIZE - 1] = 0.5; // <--- Il guastafeste
+        arrDouble[SIZE - 1] = 0.5; // <--- The party pooper
 
-        // Caso C: Array di Interi + 1 Stringa (Forza la conversione a Object generico)
+        // Case C: Array of Integers + 1 String (Forces transition to PACKED_ELEMENTS / Generic)
         const arrTagged = new Array(SIZE).fill(0).map((_, i) => i);
-        arrTagged[SIZE - 1] = "Sono lento"; // <--- Il disastro
+        arrTagged[SIZE - 1] = "I am slow"; // <--- The disaster
 
-        bench('Read Packed SMI (Solo Interi)', () => {
+        bench('Read Packed SMI (Integers only)', () => {
             let sum = 0;
-            for (let i = 0; i < SIZE; i++) sum += arrSmi[i]; // Lettura veloce
+            for (let i = 0; i < SIZE; i++) sum += arrSmi[i]; // Fast direct access
             return sum;
         });
 
-        bench('Read Packed DOUBLE (Con 1 decimale)', () => {
+        bench('Read Packed DOUBLE (With 1 decimal)', () => {
             let sum = 0;
-            for (let i = 0; i < SIZE; i++) sum += arrDouble[i]; // Lettura leggermente più lenta
+            for (let i = 0; i < SIZE; i++) sum += arrDouble[i]; // Fast (modern CPUs handle floats very well)
             return sum;
         });
 
-        bench('Read Packed ELEMENTS (Con 1 stringa)', () => {
+        bench('Read Packed ELEMENTS (With 1 string)', () => {
             let sum = 0;
-            // Qui V8 deve fare un check di tipo su OGNI elemento
+            // Here V8 has to do a type check and unboxing on EVERY element
             for (let i = 0; i < SIZE; i++) {
-                // forziamo un'operazione matematica per vedere il costo del type check
+                // Forcing a math operation to highlight the type checking overhead
                 const val = typeof arrTagged[i] === 'number' ? arrTagged[i] : 0;
                 sum += val;
             }
@@ -59,18 +59,18 @@ async function main() {
 
     group('Part 2: Object Shapes (Monomorphic vs Polymorphic)', () => {
 
-        bench('Lettura Monomorphic {a, b}', () => {
+        bench('Read Monomorphic {a, b}', () => {
             let sum = 0;
             for (let i = 0; i < SIZE; i++) {
-                sum += monoArray[i].a; // Accesso diretto (Offset fisso)
+                sum += monoArray[i].a; // Direct access (Fixed offset in memory)
             }
             return sum;
         });
 
-        bench('Lettura Polymorphic {a, b} vs {b, a}', () => {
+        bench('Read Polymorphic {a, b} vs {b, a}', () => {
             let sum = 0;
             for (let i = 0; i < SIZE; i++) {
-                sum += polyArray[i].a; // V8 deve indovinare la Shape ogni volta
+                sum += polyArray[i].a; // V8 has to check the Hidden Class (Shape) every time
             }
             return sum;
         });

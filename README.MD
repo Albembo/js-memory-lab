@@ -5,6 +5,7 @@ Benchmarks included:
 
 - **Array Allocation Strategies** — push vs `new Array` vs TypedArray (`bench-array`)
 - **Element Kinds & Hidden Classes** — SMI vs Double vs Tagged arrays, Monomorphic vs Polymorphic objects (`bench-types`)
+- **Garbage Collection** — Map vs WeakMap (`bench-gc`)
 
 How to run:
 
@@ -16,4 +17,7 @@ npm run bench-array
 
 # Element kinds & object shapes
 npm run bench-types
+
+# Garbage Collection
+npm run bench-gc
 ```

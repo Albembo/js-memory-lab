@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bench-array": "node bench-array.mjs",
-    "bench-types": "node bench-types.mjs"
+    "bench-types": "node bench-types.mjs",
+    "bench-gc": "node bench-gc.mjs",
+    "bench-eventloop": "node bench-eventloop.mjs"
   },
   "keywords": [],
   "author": "",

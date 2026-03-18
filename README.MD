@@ -6,6 +6,7 @@ Benchmarks included:
 - **Array Allocation Strategies** — push vs `new Array` vs TypedArray (`bench-array`)
 - **Element Kinds & Hidden Classes** — SMI vs Double vs Tagged arrays, Monomorphic vs Polymorphic objects (`bench-types`)
 - **Garbage Collection** — Map vs WeakMap (`bench-gc`)
+- **Event Loop** — Promise vs setImmediate (`bench-eventloop`)
 
 How to run:
 
@@ -20,4 +21,7 @@ npm run bench-types
 
 # Garbage Collection
 npm run bench-gc
+
+# Event Loop
+npm run bench-eventloop
 ```

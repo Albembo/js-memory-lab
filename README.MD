@@ -7,6 +7,7 @@ Benchmarks included:
 - **Element Kinds & Hidden Classes** — SMI vs Double vs Tagged arrays, Monomorphic vs Polymorphic objects (`bench-types`)
 - **Garbage Collection** — Map vs WeakMap (`bench-gc`)
 - **Event Loop** — Promise vs setImmediate (`bench-eventloop`)
+- **Worker Threads** — CPU-bound task on Main Thread vs Worker Thread (`bench-workers`)
 
 How to run:
 
@@ -24,4 +25,7 @@ npm run bench-gc
 
 # Event Loop
 npm run bench-eventloop
+
+# Worker Threads
+npm run bench-workers
 ```

@@ -9,7 +9,8 @@
     "bench-types": "node bench-types.mjs",
     "bench-gc": "node bench-gc.mjs",
     "bench-eventloop": "node bench-eventloop.mjs",
-    "bench-workers": "node bench-workers.mjs"
+    "bench-workers": "node bench-workers.mjs",
+    "bench-atomics": "node bench-atomics.mjs"
   },
   "keywords": [],
   "author": "",

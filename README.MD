@@ -8,6 +8,7 @@ Benchmarks included:
 - **Garbage Collection** — Map vs WeakMap (`bench-gc`)
 - **Event Loop** — Promise vs setImmediate (`bench-eventloop`)
 - **Worker Threads** — CPU-bound task on Main Thread vs Worker Thread (`bench-workers`)
+- **Shared Memory** — Race Condition vs Atomics (`bench-atomics`)
 
 How to run:
 
@@ -28,4 +29,7 @@ npm run bench-eventloop
 
 # Worker Threads
 npm run bench-workers
+
+# Shared Memory
+npm run bench-atomics
 ```

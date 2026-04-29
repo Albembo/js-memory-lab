@@ -10,7 +10,8 @@
     "bench-gc": "node bench-gc.mjs",
     "bench-eventloop": "node bench-eventloop.mjs",
     "bench-workers": "node bench-workers.mjs",
-    "bench-atomics": "node bench-atomics.mjs"
+    "bench-atomics": "node bench-atomics.mjs",
+    "proxy-cache": "node proxy-cache.mjs"
   },
   "keywords": [],
   "author": "",

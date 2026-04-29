@@ -32,4 +32,7 @@ npm run bench-workers
 
 # Shared Memory
 npm run bench-atomics
+
+# Proxy Cache
+npm run proxy-cache
 ```

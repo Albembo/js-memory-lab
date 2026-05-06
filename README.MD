@@ -9,6 +9,9 @@ Benchmarks included:
 - **Event Loop** — Promise vs setImmediate (`bench-eventloop`)
 - **Worker Threads** — CPU-bound task on Main Thread vs Worker Thread (`bench-workers`)
 - **Shared Memory** — Race Condition vs Atomics (`bench-atomics`)
+- **Proxy Cache** — Using Map to cache the result of a proxy (`proxy-cache.mjs`)
+- **Proxies & Private Fields** — Proxies and the pitfalls of private fields (`proxy-reflect.mjs`)
+
 
 How to run:
 
@@ -32,6 +35,9 @@ npm run bench-workers
 
 # Shared Memory
 npm run bench-atomics
+
+# Proxies & Private Fields
+npm run proxy-reflect
 
 # Proxy Cache
 npm run proxy-cache

@@ -12,7 +12,8 @@
     "bench-workers": "node bench-workers.mjs",
     "bench-atomics": "node bench-atomics.mjs",
     "proxy-reflect": "node proxy-reflect.mjs",
-    "proxy-cache": "node proxy-cache.mjs"
+    "proxy-cache": "node proxy-cache.mjs",
+    "proxy-symbols": "node proxy-symbols.mjs"
   },
   "keywords": [],
   "author": "",

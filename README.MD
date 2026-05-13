@@ -11,7 +11,7 @@ Benchmarks included:
 - **Shared Memory** — Race Condition vs Atomics (`bench-atomics`)
 - **Proxy Cache** — Using Map to cache the result of a proxy (`proxy-cache.mjs`)
 - **Proxies & Private Fields** — Proxies and the pitfalls of private fields (`proxy-reflect.mjs`)
-
+- **Proxy Symbols** — Using Well-Known Symbols to hook into the language's iteration protocol (`proxy-symbols.mjs`)
 
 How to run:
 
@@ -41,4 +41,7 @@ npm run proxy-reflect
 
 # Proxy Cache
 npm run proxy-cache
+
+# Proxy Symbols
+npm run proxy-symbols
 ```
